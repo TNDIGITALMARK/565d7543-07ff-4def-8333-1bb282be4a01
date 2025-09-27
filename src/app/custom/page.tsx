@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
@@ -11,46 +11,55 @@ import type { Product } from '@/data/products';
 export const dynamic = 'force-dynamic';
 
 export default function CustomProjectsPage() {
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>(
-    products.filter(product => product.category === 'custom')
-  );
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedAgeRanges, setSelectedAgeRanges] = useState<string[]>([]);
+  const [selectedDifficulties, setSelectedDifficulties] = useState<string[]>([]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1500]);
+  const [sortBy, setSortBy] = useState<string>('name');
 
   const customProducts = products.filter(product => product.category === 'custom');
 
-  const handleFilter = (filters: {
-    category: string;
-    subcategory: string;
-    priceRange: [number, number];
-    ageRange: string;
-    difficulty: string;
-    inStock: boolean;
-  }) => {
+  const filteredProducts = useMemo(() => {
     let filtered = customProducts;
 
-    if (filters.subcategory && filters.subcategory !== 'All') {
-      filtered = filtered.filter(product => product.subcategory === filters.subcategory);
+    // Filter by selected categories (subcategories)
+    if (selectedCategories.length > 0) {
+      filtered = filtered.filter(product => selectedCategories.includes(product.subcategory));
     }
 
-    if (filters.priceRange[0] > 0 || filters.priceRange[1] < 1000) {
-      filtered = filtered.filter(product =>
-        product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1]
-      );
+    // Filter by age ranges
+    if (selectedAgeRanges.length > 0) {
+      filtered = filtered.filter(product => selectedAgeRanges.includes(product.ageRange));
     }
 
-    if (filters.ageRange && filters.ageRange !== 'All') {
-      filtered = filtered.filter(product => product.ageRange === filters.ageRange);
+    // Filter by difficulties
+    if (selectedDifficulties.length > 0) {
+      filtered = filtered.filter(product => selectedDifficulties.includes(product.difficulty));
     }
 
-    if (filters.difficulty && filters.difficulty !== 'All') {
-      filtered = filtered.filter(product => product.difficulty === filters.difficulty);
+    // Filter by price range
+    filtered = filtered.filter(product =>
+      product.price >= priceRange[0] && product.price <= priceRange[1]
+    );
+
+    // Sort products
+    switch (sortBy) {
+      case 'name':
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'price-low':
+        filtered.sort((a, b) => a.price - b.price);
+        break;
+      case 'price-high':
+        filtered.sort((a, b) => b.price - a.price);
+        break;
+      case 'rating':
+        filtered.sort((a, b) => b.rating - a.rating);
+        break;
     }
 
-    if (filters.inStock) {
-      filtered = filtered.filter(product => product.inStock);
-    }
-
-    setFilteredProducts(filtered);
-  };
+    return filtered;
+  }, [customProducts, selectedCategories, selectedAgeRanges, selectedDifficulties, priceRange, sortBy]);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -100,8 +109,16 @@ export default function CustomProjectsPage() {
           <aside className="lg:w-72 flex-shrink-0">
             <ProductFilters
               category="custom"
-              subcategories={categories.custom}
-              onFilter={handleFilter}
+              selectedCategories={selectedCategories}
+              selectedAgeRanges={selectedAgeRanges}
+              selectedDifficulties={selectedDifficulties}
+              priceRange={priceRange}
+              sortBy={sortBy}
+              onCategoriesChange={setSelectedCategories}
+              onAgeRangesChange={setSelectedAgeRanges}
+              onDifficultiesChange={setSelectedDifficulties}
+              onPriceRangeChange={setPriceRange}
+              onSortChange={setSortBy}
             />
           </aside>
 

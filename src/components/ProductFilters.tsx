@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { categories, ageRanges, difficulties } from '@/data/products';
 
 interface ProductFiltersProps {
-  category: 'stem' | 'gaming';
+  category: 'stem' | 'gaming' | 'custom';
   selectedCategories: string[];
   selectedAgeRanges: string[];
   selectedDifficulties: string[];
@@ -169,9 +169,9 @@ export default function ProductFilters({
             <Slider
               value={priceRange}
               onValueChange={(value) => onPriceRangeChange([value[0], value[1]])}
-              max={150}
+              max={category === 'custom' ? 1500 : 150}
               min={0}
-              step={5}
+              step={category === 'custom' ? 25 : 5}
               className="w-full"
             />
             <div className="flex justify-between text-sm text-gray-600">

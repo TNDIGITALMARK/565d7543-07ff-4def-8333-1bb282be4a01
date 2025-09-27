@@ -9,8 +9,10 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   
+  outputFileTracingRoot: process.cwd(), // Fix workspace root warnings
+
   experimental: {
-    outputFileTracingRoot: process.cwd(), // Fix workspace root warnings
+    // Empty experimental section - outputFileTracingRoot moved out
   },
   
   // Simple image configuration
