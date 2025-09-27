@@ -1,7 +1,7 @@
 export interface Product {
   id: string;
   name: string;
-  category: 'stem' | 'gaming';
+  category: 'stem' | 'gaming' | 'custom';
   subcategory: string;
   price: number;
   originalPrice?: number;
@@ -235,6 +235,107 @@ export const products: Product[] = [
     compatibility: 'Any TTRPG system',
     inStock: true,
     bestseller: true
+  },
+
+  // Custom Projects
+  {
+    id: 'custom-1',
+    name: 'Portfolio Website Design',
+    category: 'custom',
+    subcategory: 'Web Design',
+    price: 299.99,
+    rating: 4.8,
+    reviewCount: 45,
+    image: '/api/placeholder/300/300',
+    images: ['/api/placeholder/300/300', '/api/placeholder/300/300'],
+    description: 'Custom-designed responsive portfolio website tailored to showcase your professional work and personal brand.',
+    features: ['Responsive design', 'SEO optimization', 'Contact forms', 'Portfolio gallery'],
+    ageRange: 'All Ages',
+    difficulty: 'Advanced',
+    inStock: true,
+    bestseller: true
+  },
+  {
+    id: 'custom-2',
+    name: 'Brand Identity Package',
+    category: 'custom',
+    subcategory: 'Branding',
+    price: 199.99,
+    rating: 4.9,
+    reviewCount: 67,
+    image: '/api/placeholder/300/300',
+    images: ['/api/placeholder/300/300', '/api/placeholder/300/300', '/api/placeholder/300/300'],
+    description: 'Complete brand identity solution including logo design, color palette, typography, and brand guidelines.',
+    features: ['Logo variations', 'Color schemes', 'Typography guide', 'Brand manual'],
+    ageRange: 'All Ages',
+    difficulty: 'Advanced',
+    inStock: true
+  },
+  {
+    id: 'custom-3',
+    name: 'Mobile App UI/UX Design',
+    category: 'custom',
+    subcategory: 'App Design',
+    price: 499.99,
+    rating: 4.7,
+    reviewCount: 32,
+    image: '/api/placeholder/300/300',
+    images: ['/api/placeholder/300/300', '/api/placeholder/300/300'],
+    description: 'Professional mobile application interface and user experience design with interactive prototypes.',
+    features: ['Wireframes', 'High-fidelity mockups', 'Interactive prototype', 'Design system'],
+    ageRange: 'All Ages',
+    difficulty: 'Advanced',
+    inStock: true,
+    newProduct: true
+  },
+  {
+    id: 'custom-4',
+    name: 'E-commerce Store Setup',
+    category: 'custom',
+    subcategory: 'E-commerce',
+    price: 799.99,
+    rating: 4.6,
+    reviewCount: 28,
+    image: '/api/placeholder/300/300',
+    images: ['/api/placeholder/300/300', '/api/placeholder/300/300'],
+    description: 'Full e-commerce website development with payment integration and inventory management.',
+    features: ['Payment gateway', 'Inventory system', 'Admin dashboard', 'Mobile responsive'],
+    ageRange: 'All Ages',
+    difficulty: 'Advanced',
+    inStock: true
+  },
+  {
+    id: 'custom-5',
+    name: 'Marketing Materials Design',
+    category: 'custom',
+    subcategory: 'Print Design',
+    price: 149.99,
+    rating: 4.5,
+    reviewCount: 53,
+    image: '/api/placeholder/300/300',
+    images: ['/api/placeholder/300/300'],
+    description: 'Professional marketing collateral including business cards, brochures, and promotional materials.',
+    features: ['Business cards', 'Brochure design', 'Flyer templates', 'Print-ready files'],
+    ageRange: 'All Ages',
+    difficulty: 'Intermediate',
+    inStock: true
+  },
+  {
+    id: 'custom-6',
+    name: 'Custom Software Solution',
+    category: 'custom',
+    subcategory: 'Software Development',
+    price: 1299.99,
+    rating: 5.0,
+    reviewCount: 15,
+    image: '/api/placeholder/300/300',
+    images: ['/api/placeholder/300/300', '/api/placeholder/300/300'],
+    description: 'Bespoke software development tailored to your specific business needs and requirements.',
+    features: ['Custom development', 'Database design', 'API integration', 'Documentation'],
+    ageRange: 'All Ages',
+    difficulty: 'Advanced',
+    inStock: true,
+    bestseller: true
   }
 ];
 
@@ -252,6 +353,14 @@ export const categories = {
     'Maps & Accessories',
     'Custom Work',
     'Paint & Tools'
+  ],
+  custom: [
+    'Web Design',
+    'Branding',
+    'App Design',
+    'E-commerce',
+    'Print Design',
+    'Software Development'
   ]
 };
 

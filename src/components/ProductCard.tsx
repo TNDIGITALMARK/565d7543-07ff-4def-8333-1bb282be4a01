@@ -9,11 +9,28 @@ import Link from 'next/link';
 
 interface ProductCardProps {
   product: Product;
+  categoryColor?: 'blue' | 'green' | 'purple';
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
-  const categoryColor = product.category === 'stem' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800';
-  const priceColor = product.category === 'stem' ? 'text-blue-600' : 'text-green-600';
+export default function ProductCard({ product, categoryColor }: ProductCardProps) {
+  const getBadgeColor = () => {
+    if (categoryColor === 'purple' || product.category === 'custom') {
+      return 'bg-purple-100 text-purple-800';
+    }
+    return product.category === 'stem' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800';
+  };
+
+  const getPriceColor = () => {
+    if (categoryColor === 'purple' || product.category === 'custom') {
+      return 'text-purple-600';
+    }
+    return product.category === 'stem' ? 'text-blue-600' : 'text-green-600';
+  };
+
+  const getCategoryLabel = () => {
+    if (product.category === 'custom') return 'Custom';
+    return product.category === 'stem' ? 'STEM' : 'Gaming';
+  };
 
   return (
     <Card className="group hover:shadow-lg transition-shadow duration-200">
@@ -45,8 +62,8 @@ export default function ProductCard({ product }: ProductCardProps) {
 
           {/* Category Badge */}
           <div className="absolute top-2 right-2">
-            <Badge className={categoryColor}>
-              {product.category === 'stem' ? 'STEM' : 'Gaming'}
+            <Badge className={getBadgeColor()}>
+              {getCategoryLabel()}
             </Badge>
           </div>
         </div>
@@ -91,7 +108,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           {/* Price */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <span className={`font-bold text-lg ${priceColor}`}>
+              <span className={`font-bold text-lg ${getPriceColor()}`}>
                 ${product.price}
               </span>
               {product.originalPrice && (

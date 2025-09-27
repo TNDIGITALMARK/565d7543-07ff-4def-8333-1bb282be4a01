@@ -40,6 +40,12 @@ export default function Header() {
               RPG Gaming
             </Link>
             <Link
+              href="/custom"
+              className="text-gray-700 hover:text-purple-600 transition-colors font-medium"
+            >
+              Custom Projects
+            </Link>
+            <Link
               href="/about"
               className="text-gray-700 hover:text-gray-900 transition-colors"
             >
@@ -118,6 +124,13 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 RPG Gaming
+              </Link>
+              <Link
+                href="/custom"
+                className="text-gray-700 hover:text-purple-600 transition-colors font-medium py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Custom Projects
               </Link>
               <Link
                 href="/about"

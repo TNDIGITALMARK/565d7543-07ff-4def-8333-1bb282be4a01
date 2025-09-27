@@ -130,6 +130,8 @@ All colors MUST be HSL.
   --color-stem-light: 199 91% 85%;
   --color-gaming-primary: 86 45% 62%; /* Green from gaming section */
   --color-gaming-light: 86 45% 85%;
+  --color-custom-primary: 259 94% 51%; /* Purple for custom projects */
+  --color-custom-light: 259 94% 85%;
   --color-orange-accent: 25 95% 53%; /* Orange accent */
   --color-purple-accent: 259 94% 51%; /* Purple accent */
 
